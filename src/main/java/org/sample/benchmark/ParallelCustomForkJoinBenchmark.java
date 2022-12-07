@@ -45,10 +45,15 @@ public class ParallelCustomForkJoinBenchmark extends RecursiveTask<Long> {
             if (length <= THRESHOLD) {
                 return computeSequentially();
             }
+            // 배열의 첫 번째 절반을 더하는 Subtask 생성
             ParallelCustomForkJoinBenchmark leftTask = new ParallelCustomForkJoinBenchmark(LongStream.range(start, start + length / 2), start, start + length / 2);
+            // leftTask 처리하도록 비동기 요청
             leftTask.fork();
+            // 배열의 나머지 절반을 더하는 subtask 생성
             ParallelCustomForkJoinBenchmark rightTask = new ParallelCustomForkJoinBenchmark(LongStream.range(start + length / 2, end), start + length / 2, end);
+            // 두 번째 서브태스크(rightTask) 동기 실행
             Long rightResult = rightTask.compute();
+            // leftTask의 결과를 읽기. 아직 종료되지 않았다면 기다린 뒤 읽음
             Long leftResult = leftTask.join();
 //            System.out.println("ForkJoinPool current thread: " + Thread.currentThread().getName());
             return leftResult + rightResult;
