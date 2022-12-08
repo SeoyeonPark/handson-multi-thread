@@ -19,8 +19,8 @@ import java.util.stream.Stream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(1)
-@Measurement(iterations = 1)
-@Warmup(iterations = 0)
+@Measurement(iterations = 3)
+@Warmup(iterations = 2)
 public class ParallelBenchmark {
     private static final long N = 10_000_000L;
 

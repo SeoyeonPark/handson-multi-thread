@@ -12,8 +12,8 @@ import java.util.stream.LongStream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(1)
-@Measurement(iterations = 1)
-@Warmup(iterations = 0)
+@Measurement(iterations = 3)
+@Warmup(iterations = 2)
 public class ParallelCustomForkJoinBenchmark extends RecursiveTask<Long> {
     private static final long N = 10_000_000L;
     private static final LongStream data = LongStream.rangeClosed(1, N + 1);
